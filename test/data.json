@@ -1,0 +1,50 @@
+// order
+{
+    "orderId": "id",
+    "address": "string",
+    "createAt": "time",
+    "updateAt": "time",
+    "status": "string",
+    "deliveries": [
+        {
+            "deliveryId": "id",
+            "status": "string",
+            "createAt": "time",
+            "updateAt": "time",
+            "shipment": {
+                "shipmentName": "string",
+                "trackingId": "id"
+            },
+            "packages": [
+                {
+                    "packageId": "id",
+                    "volumetricWeight": "float"
+                },
+                {
+                    "packageId": "id",
+                    "volumetricWeight": "float"
+                }
+            ]
+        },
+        {
+            "deliveryId": "id",
+            "status": "string",
+            "createAt": "time",
+            "updateAt": "time",
+            "shipment": {
+                "shipmentName": "string",
+                "trackingId": "id"
+            },
+            "packages": [
+                {
+                    "packageId": "id",
+                    "volumetricWeight": "float"
+                },
+                {
+                    "packageId": "id",
+                    "volumetricWeight": "float"
+                }
+            ]
+        }
+    ]
+}
