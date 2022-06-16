@@ -5,7 +5,7 @@ It is a hobby project where I am trying to create and experience the backend ser
 ## Architecture
 
 <p align="center">
-<img src="docs/assets/img/delivery.svg" alt="Architecture" title="Architecture"/>
+<img src="assets/img/delivery.svg" alt="Architecture" title="Architecture"/>
 </p>
 
 ## Non-Functional Requirements
