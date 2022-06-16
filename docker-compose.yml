@@ -13,14 +13,14 @@ services:
     networks:
       - application
     volumes: 
-      - db:/var/lib/postgresql/data
-      - ./db/migrations/create_tasks_table.sql:/docker-entrypoint-initdb.d/1.sql
-      - ./db/migrations/create_comments_table.sql:/docker-entrypoint-initdb.d/2.sql
+      - ./docker:/var/lib/postgresql/data
+      - ./docker/migrations/create_tasks_table.sql:/docker-entrypoint-initdb.d/1.sql
+      - ./docker/migrations/create_comments_table.sql:/docker-entrypoint-initdb.d/2.sql
 
   couchbase1:
     image: couchbase/server
     volumes:
-      - ./db/couchbase/node1:/opt/couchbase/var
+      - ./docker/couchbase/node1:/opt/couchbase/var
     ports:
       - 8091:8091
       - 8092:8092 

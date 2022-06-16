@@ -17,4 +17,4 @@
 .env
 
 # docker-compose colume path
-db
+docker
