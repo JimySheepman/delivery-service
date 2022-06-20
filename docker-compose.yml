@@ -13,9 +13,8 @@ services:
     networks:
       - application
     volumes: 
-      - ./docker:/var/lib/postgresql/data
-      - ./docker/migrations/create_tasks_table.sql:/docker-entrypoint-initdb.d/1.sql
-      - ./docker/migrations/create_comments_table.sql:/docker-entrypoint-initdb.d/2.sql
+      - database:/var/lib/postgresql/data
+      - ./database/migrations/001-create-tables-dispatcher-api.sql:/docker-entrypoint-initdb.d/1.sql
 
   couchbase1:
     image: couchbase/server
