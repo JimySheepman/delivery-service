@@ -4,6 +4,7 @@ import (
 	"dispatcher-api/configs"
 	"dispatcher-api/middleware"
 	"dispatcher-api/models"
+	"dispatcher-api/repository"
 	"dispatcher-api/repository/postgre"
 	"dispatcher-api/routes"
 	"dispatcher-api/service"
@@ -25,7 +26,7 @@ func main() {
 
 	dns := models.PostgreConnectionDTO{}
 	dns = dns.New()
-	pg, err := postgre.Connection(dns)
+	pg, err := repository.Connection(dns)
 	utils.IsFatalError(err)
 	repo := postgre.NewPostgreRepository(pg)
 	repo.Ping(pg)
