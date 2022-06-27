@@ -1,6 +1,9 @@
 package mock
 
-import "database/sql"
+import (
+	"context"
+	"dispatcher-api/models"
+)
 
 type postgreMockRepository struct {
 	selectShippingCompany map[int]error
@@ -12,6 +15,6 @@ func NewMockRepository() *postgreMockRepository {
 	}
 }
 
-func (r *postgreMockRepository) SelectShippingCompany(s *sql.DB) error {
-	return nil
+func (r *postgreMockRepository) SelectShippingCompany(c context.Context, deliverys models.Deliveries) (*models.Shipment, error) {
+	return nil, nil
 }

@@ -7,11 +7,11 @@ import (
 )
 
 type PostgreConnectionDTO struct {
-	Host         string
-	Port         string
-	User         string
-	Password     string
-	DatabaseName string
+	Host         string `json:"host"`
+	Port         string `json:"port"`
+	User         string `json:"user"`
+	Password     string `json:"password"`
+	DatabaseName string `json:"Database_name"`
 }
 
 func (d *PostgreConnectionDTO) New() PostgreConnectionDTO {

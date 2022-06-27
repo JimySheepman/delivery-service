@@ -4,18 +4,19 @@ import (
 	"time"
 )
 
-type Deliverys struct {
-	Deliverys []Delivery
+type Deliveries struct {
+	Deliveries []Delivery `json:"deliveries"`
 }
 
 type Delivery struct {
-	Id        int64
-	Status    string
-	CreatedAt time.Time
-	Packets   []Packet
+	Id        int64     `json:"deliveryId"`
+	Status    string    `json:"status"`
+	CreatedAt time.Time `json:"createAt"`
+	UpdateAt  time.Time `json:"updateAt"`
+	Packages  []Package `json:"packages"`
 }
 
-type Packet struct {
-	Id               int64
-	VolumetricWeight float64
+type Package struct {
+	Id               int64   `json:"packageId"`
+	VolumetricWeight float64 `json:"volumetricWeight"`
 }
