@@ -7,7 +7,7 @@ import (
 )
 
 type RepoService interface {
-	SelectShippingCompany(context.Context, models.Deliverys) (*models.Shipment, error)
+	SelectShippingCompany(context.Context, models.Deliveries) (*models.Shipment, error)
 }
 
 type repoService struct {
@@ -20,6 +20,10 @@ func NewRepoSerivce(repo repository.Repository) RepoService {
 	}
 }
 
-func (r *repoService) SelectShippingCompany(c context.Context, deliverys models.Deliverys) (*models.Shipment, error) {
-	return nil, nil
+func (s *repoService) SelectShippingCompany(c context.Context, deliverys models.Deliveries) (*models.Shipment, error) {
+	shipment, err := s.repo.SelectShippingCompany(c, deliverys)
+	if err != nil {
+		return nil, err
+	}
+	return shipment, nil
 }

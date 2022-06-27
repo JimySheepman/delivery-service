@@ -26,7 +26,7 @@ func (rc *RepoController) Healthcheck(c *fiber.Ctx) error {
 }
 
 func (rc *RepoController) SelectShippingCompany(c *fiber.Ctx) error {
-	deliverys := models.Deliverys{}
+	deliverys := models.Deliveries{}
 
 	customContext, cancel := context.WithCancel(context.Background())
 	defer cancel()

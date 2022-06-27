@@ -9,7 +9,7 @@ import (
 )
 
 type Repository interface {
-	SelectShippingCompany(context.Context, models.Deliverys) (*models.Shipment, error)
+	SelectShippingCompany(context.Context, models.Deliveries) (*models.Shipment, error)
 }
 
 func Connection(dsnDTO models.PostgreConnectionDTO) (*sql.DB, error) {
@@ -19,6 +19,11 @@ func Connection(dsnDTO models.PostgreConnectionDTO) (*sql.DB, error) {
 	}
 
 	db, err := sql.Open(os.Getenv("DRIVERNAME"), dns)
+	if err != nil {
+		return nil, err
+	}
+
+	err = db.Ping()
 	if err != nil {
 		return nil, err
 	}
