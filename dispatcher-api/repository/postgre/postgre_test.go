@@ -3,6 +3,7 @@ package postgre
 import (
 	"database/sql"
 	"dispatcher-api/models"
+	"dispatcher-api/repository"
 	"log"
 	"testing"
 
@@ -38,7 +39,7 @@ func TestShouldOpenConnection(t *testing.T) {
 
 	for _, test := range tests {
 		t.Run(test.testName, func(t *testing.T) {
-			_, actual := Connection(test.model)
+			_, actual := repository.Connection(test.model)
 			if actual != test.expected {
 				t.Errorf("got:%v expect:%v", actual, test.expected)
 			}

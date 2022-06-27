@@ -1,9 +1,10 @@
 package postgre
 
 import (
+	"context"
 	"database/sql"
+	"dispatcher-api/models"
 	"dispatcher-api/repository"
-	"log"
 
 	_ "github.com/lib/pq"
 )
@@ -18,32 +19,6 @@ func NewPostgreRepository(postgreConnection *sql.DB) repository.Repository {
 	}
 }
 
-func (r *postgreRepository) Ping(db *sql.DB) error {
-	err := db.Ping()
-	if err != nil {
-		return err
-	}
-
-	log.Println("Successfully Ping!")
-
-	return nil
-}
-
-func (r *postgreRepository) Close() error {
-	return nil
-}
-func (r *postgreRepository) FindByID() error {
-	return nil
-}
-func (r *postgreRepository) Find() error {
-	return nil
-}
-func (r *postgreRepository) Create() error {
-	return nil
-}
-func (r *postgreRepository) Update() error {
-	return nil
-}
-func (r *postgreRepository) Delete() error {
-	return nil
+func (r *postgreRepository) SelectShippingCompany(c context.Context, deliverys models.Deliverys) (*models.Shipment, error) {
+	return nil, nil
 }

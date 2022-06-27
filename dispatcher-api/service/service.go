@@ -1,18 +1,13 @@
 package service
 
 import (
-	"database/sql"
+	"context"
+	"dispatcher-api/models"
 	"dispatcher-api/repository"
 )
 
 type RepoService interface {
-	Ping(*sql.DB) error
-	Close() error
-	FindByID() error
-	Find() error
-	Create() error
-	Update() error
-	Delete() error
+	SelectShippingCompany(context.Context, models.Deliverys) (*models.Shipment, error)
 }
 
 type repoService struct {
@@ -25,25 +20,6 @@ func NewRepoSerivce(repo repository.Repository) RepoService {
 	}
 }
 
-func (r *repoService) Ping(s *sql.DB) error {
-	return nil
-}
-
-func (r *repoService) Close() error {
-	return nil
-}
-func (r *repoService) FindByID() error {
-	return nil
-}
-func (r *repoService) Find() error {
-	return nil
-}
-func (r *repoService) Create() error {
-	return nil
-}
-func (r *repoService) Update() error {
-	return nil
-}
-func (r *repoService) Delete() error {
-	return nil
+func (r *repoService) SelectShippingCompany(c context.Context, deliverys models.Deliverys) (*models.Shipment, error) {
+	return nil, nil
 }

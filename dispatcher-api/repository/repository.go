@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"context"
 	"database/sql"
 	"dispatcher-api/models"
 	"log"
@@ -8,13 +9,7 @@ import (
 )
 
 type Repository interface {
-	Ping(*sql.DB) error
-	Close() error
-	FindByID() error
-	Find() error
-	Create() error
-	Update() error
-	Delete() error
+	SelectShippingCompany(context.Context, models.Deliverys) (*models.Shipment, error)
 }
 
 func Connection(dsnDTO models.PostgreConnectionDTO) (*sql.DB, error) {

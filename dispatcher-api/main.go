@@ -29,7 +29,6 @@ func main() {
 	pg, err := repository.Connection(dns)
 	utils.IsFatalError(err)
 	repo := postgre.NewPostgreRepository(pg)
-	repo.Ping(pg)
 
 	repoService := service.NewRepoSerivce(repo)
 
