@@ -19,6 +19,6 @@ func NewPostgreRepository(postgreConnection *sql.DB) repository.Repository {
 	}
 }
 
-func (r *postgreRepository) SelectShippingCompany(c context.Context, deliverys models.Deliveries) (*models.Shipment, error) {
+func (r *postgreRepository) SelectShippingCompany(c context.Context, deliveries *models.Deliveries) (*models.Shipment, error) {
 	return nil, nil
 }

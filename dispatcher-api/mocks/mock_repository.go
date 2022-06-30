@@ -15,6 +15,6 @@ func NewMockRepository() *postgreMockRepository {
 	}
 }
 
-func (r *postgreMockRepository) SelectShippingCompany(c context.Context, deliverys models.Deliveries) (*models.Shipment, error) {
+func (r *postgreMockRepository) SelectShippingCompany(c context.Context, deliveries models.Deliveries) (*models.Shipment, error) {
 	return nil, nil
 }
