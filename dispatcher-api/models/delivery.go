@@ -1,19 +1,14 @@
 package models
 
-import (
-	"time"
-)
-
 type Deliveries struct {
 	Deliveries []Delivery `json:"deliveries"`
 }
 
 type Delivery struct {
-	Id        int64     `json:"deliveryId"`
-	Status    string    `json:"status"`
-	CreatedAt time.Time `json:"createAt"`
-	UpdateAt  time.Time `json:"updateAt"`
-	Packages  []Package `json:"packages"`
+	Id       int64     `json:"deliveryId"`
+	City     string    `json:"city"`
+	District string    `json:"district"`
+	Packages []Package `json:"packages"`
 }
 
 type Package struct {

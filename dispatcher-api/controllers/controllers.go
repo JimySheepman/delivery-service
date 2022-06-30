@@ -26,19 +26,19 @@ func (rc *RepoController) Healthcheck(c *fiber.Ctx) error {
 }
 
 func (rc *RepoController) SelectShippingCompany(c *fiber.Ctx) error {
-	deliverys := models.Deliveries{}
+	var deliveries models.Deliveries
 
 	customContext, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
-	if err := c.BodyParser(deliverys); err != nil {
+	if err := c.BodyParser(&deliveries); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(&fiber.Map{
 			"status":  "fail",
 			"message": err.Error(),
 		})
 	}
 
-	shipments, err := rc.repoService.SelectShippingCompany(customContext, deliverys)
+	shipments, err := rc.repoService.SelectShippingCompany(customContext, &deliveries)
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(&fiber.Map{
 			"status":  "fail",

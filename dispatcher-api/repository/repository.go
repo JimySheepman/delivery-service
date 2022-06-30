@@ -9,7 +9,7 @@ import (
 )
 
 type Repository interface {
-	SelectShippingCompany(context.Context, models.Deliveries) (*models.Shipment, error)
+	SelectShippingCompany(context.Context, *models.Deliveries) (*models.Shipment, error)
 }
 
 func Connection(dsnDTO models.PostgreConnectionDTO) (*sql.DB, error) {

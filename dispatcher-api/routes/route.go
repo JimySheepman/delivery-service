@@ -12,4 +12,5 @@ func Routes(app *fiber.App, repo service.RepoService) {
 	controller := controllers.NewController(repo)
 
 	route.Get("/healthcheck", controller.Healthcheck)
+	route.Post("/shipping", controller.SelectShippingCompany)
 }
