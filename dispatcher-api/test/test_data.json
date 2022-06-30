@@ -1,0 +1,229 @@
+{
+    "deliveries": [
+        {
+            "deliveryId": 100,
+            "city": "Ankara",
+            "district": "Gölbaşı",
+            "packages": [
+                {
+                    "packageId": 10001,
+                    "volumetricWeight": 18.1
+                },
+                {
+                    "packageId": 10002,
+                    "volumetricWeight": 6.2
+                }
+            ]
+        },
+        {
+            "deliveryId": 101,
+            "city": "Ankara",
+            "district": "Yenimahalle",
+            "packages": [
+                {
+                    "packageId": 10003,
+                    "volumetricWeight": 12.1
+                },
+                {
+                    "packageId": 10004,
+                    "volumetricWeight": 2.2
+                }
+            ]
+        },
+        {
+            "deliveryId": 103,
+            "city": "Ankara",
+            "district": "Mamak",
+            "packages": [
+                {
+                    "packageId": 10005,
+                    "volumetricWeight": 23.1
+                },
+                {
+                    "packageId": 10006,
+                    "volumetricWeight": 13.2
+                }
+            ]
+        },
+        {
+            "deliveryId": 104,
+            "city": "İstanbul",
+            "district": "Beşiktaş",
+            "packages": [
+                {
+                    "packageId": 10007,
+                    "volumetricWeight": 11.1
+                },
+                {
+                    "packageId": 10008,
+                    "volumetricWeight": 43.2
+                }
+            ]
+        },
+        {
+            "deliveryId": 105,
+            "city": "İstanbul",
+            "district": "Kadıköy",
+            "packages": [
+                {
+                    "packageId": 10009,
+                    "volumetricWeight": 53.1
+                },
+                {
+                    "packageId": 10010,
+                    "volumetricWeight": 20.2
+                }
+            ]
+        },
+        {
+            "deliveryId": 106,
+            "city": "Ankara",
+            "district": "Gölbaşı",
+            "packages": [
+                {
+                    "packageId": 10011,
+                    "volumetricWeight": 4.1
+                },
+                {
+                    "packageId": 10012,
+                    "volumetricWeight": 23.2
+                }
+            ]
+        },
+        {
+            "deliveryId": 107,
+            "city": "Ankara",
+            "district": "Yenimahalle",
+            "packages": [
+                {
+                    "packageId": 10013,
+                    "volumetricWeight": 60.1
+                },
+                {
+                    "packageId": 10014,
+                    "volumetricWeight": 23.2
+                }
+            ]
+        },
+        {
+            "deliveryId": 108,
+            "city": "Ankara",
+            "district": "Mamak",
+            "packages": [
+                {
+                    "packageId": 10015,
+                    "volumetricWeight": 10.1
+                },
+                {
+                    "packageId": 10016,
+                    "volumetricWeight": 3.2
+                }
+            ]
+        },
+        {
+            "deliveryId": 109,
+            "city": "İstanbul",
+            "district": "Beşiktaş",
+            "packages": [
+                {
+                    "packageId": 10017,
+                    "volumetricWeight": 10.1
+                },
+                {
+                    "packageId": 10018,
+                    "volumetricWeight": 3.2
+                }
+            ]
+        },
+        {
+            "deliveryId": 110,
+            "city": "İstanbul",
+            "district": "Kadıköy",
+            "packages": [
+                {
+                    "packageId": 10019,
+                    "volumetricWeight": 10.1
+                },
+                {
+                    "packageId": 10020,
+                    "volumetricWeight": 3.2
+                }
+            ]
+        },
+        {
+            "deliveryId": 111,
+            "city": "Ankara",
+            "district": "Gölbaşı",
+            "packages": [
+                {
+                    "packageId": 10021,
+                    "volumetricWeight": 10.1
+                },
+                {
+                    "packageId": 10022,
+                    "volumetricWeight": 3.2
+                }
+            ]
+        },
+        {
+            "deliveryId": 112,
+            "city": "Ankara",
+            "district": "Yenimahalle",
+            "packages": [
+                {
+                    "packageId": 10023,
+                    "volumetricWeight": 10.1
+                },
+                {
+                    "packageId": 10024,
+                    "volumetricWeight": 3.2
+                }
+            ]
+        },
+        {
+            "deliveryId": 113,
+            "city": "Ankara",
+            "district": "Mamak",
+            "packages": [
+                {
+                    "packageId": 10025,
+                    "volumetricWeight": 10.1
+                },
+                {
+                    "packageId": 10026,
+                    "volumetricWeight": 3.2
+                }
+            ]
+        },
+        {
+            "deliveryId": 114,
+            "city": "İstanbul",
+            "district": "Beşiktaş",
+            "packages": [
+                {
+                    "packageId": 10027,
+                    "volumetricWeight": 10.1
+                },
+                {
+                    "packageId": 10028,
+                    "volumetricWeight": 3.2
+                }
+            ]
+        },
+        {
+            "deliveryId": 115,
+            "city": "İstanbul",
+            "district": "Kadıköy",
+            "packages": [
+                {
+                    "packageId": 10029,
+                    "volumetricWeight": 10.1
+                },
+                {
+                    "packageId": 10030,
+                    "volumetricWeight": 3.2
+                }
+            ]
+        }
+    ]
+}
