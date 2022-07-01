@@ -25,9 +25,9 @@ CREATE TABLE seller_companies (
     seller_name VARCHAR(64) NOT NULL
 );
 
-DROP TABLE IF EXISTS shipping_companyies;
+DROP TABLE IF EXISTS shipping_companies;
 
-CREATE TABLE shipping_companyies (
+CREATE TABLE shipping_companies (
     company_id uuid PRIMARY KEY,
     company_name VARCHAR(64) NOT NULL,
     charge_per_package INTEGER
@@ -38,8 +38,8 @@ DROP TABLE IF EXISTS regions_service;
 CREATE TABLE regions_service (
     service_id serial PRIMARY KEY,
     company_id uuid,
-    district_id serial,
-    CONSTRAINT fk_company FOREIGN KEY(company_id) REFERENCES shipping_companyies(company_id) ON DELETE
+    district_id INTEGER,
+    CONSTRAINT fk_company FOREIGN KEY(company_id) REFERENCES shipping_companies(company_id) ON DELETE
     SET
         NULL,
         CONSTRAINT fk_district FOREIGN KEY(district_id) REFERENCES districts(district_id) ON DELETE
@@ -54,7 +54,7 @@ CREATE TABLE daily_volumetric_weight_limits (
     company_id uuid,
     volumetric_weight_limit NUMERIC(7, 3) NOT NULL,
     volumetric_weight_current NUMERIC(7, 3) NOT NULL,
-    CONSTRAINT fk_company FOREIGN KEY(company_id) REFERENCES shipping_companyies(company_id) ON DELETE
+    CONSTRAINT fk_company FOREIGN KEY(company_id) REFERENCES shipping_companies(company_id) ON DELETE
     SET
         NULL
 );
@@ -69,7 +69,7 @@ CREATE TABLE delivery_speeds (
     CONSTRAINT fk_district FOREIGN KEY(district_id) REFERENCES districts(district_id) ON DELETE
     SET
         NULL,
-        CONSTRAINT fk_company FOREIGN KEY(company_id) REFERENCES shipping_companyies(company_id) ON DELETE
+        CONSTRAINT fk_company FOREIGN KEY(company_id) REFERENCES shipping_companies(company_id) ON DELETE
     SET
         NULL
 );
@@ -83,50 +83,10 @@ CREATE TABLE contracted_shipping_companies (
     CONSTRAINT fk_seller FOREIGN KEY(seller_id) REFERENCES seller_companies(seller_id) ON DELETE
     SET
         NULL,
-        CONSTRAINT fk_company FOREIGN KEY(company_id) REFERENCES shipping_companyies(company_id) ON DELETE
+        CONSTRAINT fk_company FOREIGN KEY(company_id) REFERENCES shipping_companies(company_id) ON DELETE
     SET
         NULL
 );
-
-select
-    *
-from
-    cities;
-
-select
-    *
-from
-    districts;
-
-select
-    *
-from
-    seller_companies;
-
-select
-    *
-from
-    shipping_companyies;
-
-select
-    *
-from
-    regions_service;
-
-select
-    *
-from
-    daily_volumetric_weight_limits;
-
-select
-    *
-from
-    delivery_speeds;
-
-select
-    *
-from
-    contracted_shipping_companies;
 
 --cities 
 insert into
@@ -216,45 +176,60 @@ insert into
 values
     (uuid_generate_v4(), 'Bellona');
 
---shipping companyies
+--shipping companies
 insert into
-    shipping_companyies (company_id, company_name, charge_per_package)
+    shipping_companies (company_id, company_name, charge_per_package)
 values
     (uuid_generate_v4(), 'Yurtiçi Kargo', 22);
 
 insert into
-    shipping_companyies (company_id, company_name, charge_per_package)
+    shipping_companies (company_id, company_name, charge_per_package)
 values
     (uuid_generate_v4(), 'Aras Kargo', 24);
 
 insert into
-    shipping_companyies (company_id, company_name, charge_per_package)
+    shipping_companies (company_id, company_name, charge_per_package)
 values
     (uuid_generate_v4(), 'MNG Kargo', 27);
 
 insert into
-    shipping_companyies (company_id, company_name, charge_per_package)
+    shipping_companies (company_id, company_name, charge_per_package)
 values
     (uuid_generate_v4(), 'Horoz Lojistik', 34);
 
 insert into
-    shipping_companyies (company_id, company_name, charge_per_package)
+    shipping_companies (company_id, company_name, charge_per_package)
 values
     (uuid_generate_v4(), 'Moto Kurye', 13);
 
+-- add regions_service
 insert into
     regions_service (company_id, district_id)
-values
+VALUES
     (
-        'aaa1e56f-cce8-4702-bb37-3ae072d42ad6' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'Yurtiçi Kargo'
+        ),
         1
     );
 
 insert into
     regions_service (company_id, district_id)
-values
+VALUES
     (
-        'aaa1e56f-cce8-4702-bb37-3ae072d42ad6' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'Yurtiçi Kargo'
+        ),
         2
     );
 
@@ -262,7 +237,14 @@ insert into
     regions_service (company_id, district_id)
 values
     (
-        'aaa1e56f-cce8-4702-bb37-3ae072d42ad6' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'Yurtiçi Kargo'
+        ),
         9
     );
 
@@ -270,7 +252,14 @@ insert into
     regions_service (company_id, district_id)
 values
     (
-        'aaa1e56f-cce8-4702-bb37-3ae072d42ad6' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'Yurtiçi Kargo'
+        ),
         10
     );
 
@@ -278,7 +267,14 @@ insert into
     regions_service (company_id, district_id)
 values
     (
-        'f693a578-8351-4a37-aac6-8dc976e84c33' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'Aras Kargo'
+        ),
         3
     );
 
@@ -286,7 +282,14 @@ insert into
     regions_service (company_id, district_id)
 values
     (
-        'f693a578-8351-4a37-aac6-8dc976e84c33' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'Aras Kargo'
+        ),
         4
     );
 
@@ -294,7 +297,14 @@ insert into
     regions_service (company_id, district_id)
 values
     (
-        'f693a578-8351-4a37-aac6-8dc976e84c33' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'Aras Kargo'
+        ),
         8
     );
 
@@ -302,7 +312,14 @@ insert into
     regions_service (company_id, district_id)
 values
     (
-        'f693a578-8351-4a37-aac6-8dc976e84c33' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'Aras Kargo'
+        ),
         7
     );
 
@@ -310,7 +327,14 @@ insert into
     regions_service (company_id, district_id)
 values
     (
-        '6d1cb828-c793-41d6-85bc-4707728b8bd7' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'MNG Kargo'
+        ),
         1
     );
 
@@ -318,7 +342,14 @@ insert into
     regions_service (company_id, district_id)
 values
     (
-        '6d1cb828-c793-41d6-85bc-4707728b8bd7' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'MNG Kargo'
+        ),
         2
     );
 
@@ -326,7 +357,14 @@ insert into
     regions_service (company_id, district_id)
 values
     (
-        '6d1cb828-c793-41d6-85bc-4707728b8bd7' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'MNG Kargo'
+        ),
         3
     );
 
@@ -334,7 +372,14 @@ insert into
     regions_service (company_id, district_id)
 values
     (
-        '6d1cb828-c793-41d6-85bc-4707728b8bd7' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'MNG Kargo'
+        ),
         4
     );
 
@@ -342,7 +387,14 @@ insert into
     regions_service (company_id, district_id)
 values
     (
-        '6d1cb828-c793-41d6-85bc-4707728b8bd7' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'MNG Kargo'
+        ),
         5
     );
 
@@ -350,7 +402,14 @@ insert into
     regions_service (company_id, district_id)
 values
     (
-        '6d1cb828-c793-41d6-85bc-4707728b8bd7' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'MNG Kargo'
+        ),
         6
     );
 
@@ -358,7 +417,14 @@ insert into
     regions_service (company_id, district_id)
 values
     (
-        '6d1cb828-c793-41d6-85bc-4707728b8bd7' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'MNG Kargo'
+        ),
         7
     );
 
@@ -366,7 +432,14 @@ insert into
     regions_service (company_id, district_id)
 values
     (
-        '6d1cb828-c793-41d6-85bc-4707728b8bd7' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'MNG Kargo'
+        ),
         8
     );
 
@@ -374,7 +447,14 @@ insert into
     regions_service (company_id, district_id)
 values
     (
-        '6d1cb828-c793-41d6-85bc-4707728b8bd7' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'MNG Kargo'
+        ),
         9
     );
 
@@ -382,7 +462,14 @@ insert into
     regions_service (company_id, district_id)
 values
     (
-        '6d1cb828-c793-41d6-85bc-4707728b8bd7' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'MNG Kargo'
+        ),
         10
     );
 
@@ -390,7 +477,14 @@ insert into
     regions_service (company_id, district_id)
 values
     (
-        'abbcd65f-082c-4a6f-b07c-328bba8dcd96' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'Horoz Kargo'
+        ),
         5
     );
 
@@ -398,7 +492,14 @@ insert into
     regions_service (company_id, district_id)
 values
     (
-        'abbcd65f-082c-4a6f-b07c-328bba8dcd96' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'Horoz Kargo'
+        ),
         6
     );
 
@@ -406,7 +507,14 @@ insert into
     regions_service (company_id, district_id)
 values
     (
-        '18928aad-d569-479d-8f17-bd9461c5528c' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'Moto Kurye'
+        ),
         6
     );
 
@@ -414,7 +522,14 @@ insert into
     regions_service (company_id, district_id)
 values
     (
-        '18928aad-d569-479d-8f17-bd9461c5528c' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'Moto Kurye'
+        ),
         7
     );
 
@@ -422,7 +537,14 @@ insert into
     regions_service (company_id, district_id)
 values
     (
-        '18928aad-d569-479d-8f17-bd9461c5528c' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'Moto Kurye'
+        ),
         8
     );
 
@@ -430,7 +552,14 @@ insert into
     regions_service (company_id, district_id)
 values
     (
-        '18928aad-d569-479d-8f17-bd9461c5528c' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'Moto Kurye'
+        ),
         9
     );
 
@@ -438,7 +567,14 @@ insert into
     regions_service (company_id, district_id)
 values
     (
-        '18928aad-d569-479d-8f17-bd9461c5528c' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'Moto Kurye'
+        ),
         10
     );
 
@@ -451,7 +587,14 @@ insert into
     )
 values
     (
-        'aaa1e56f-cce8-4702-bb37-3ae072d42ad6' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'Yurtiçi Kargo'
+        ),
         1100,
         0
     );
@@ -464,7 +607,14 @@ insert into
     )
 values
     (
-        'f693a578-8351-4a37-aac6-8dc976e84c33' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'Aras Kargo'
+        ),
         1200,
         0
     );
@@ -477,7 +627,14 @@ insert into
     )
 values
     (
-        '6d1cb828-c793-41d6-85bc-4707728b8bd7' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'MNG Kargo'
+        ),
         1000,
         0
     );
@@ -490,7 +647,14 @@ insert into
     )
 values
     (
-        'abbcd65f-082c-4a6f-b07c-328bba8dcd96' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'Horoz Kargo'
+        ),
         5000,
         0
     );
@@ -503,7 +667,14 @@ insert into
     )
 values
     (
-        '18928aad-d569-479d-8f17-bd9461c5528c' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'Moto Kurye'
+        ),
         250,
         0
     );
@@ -514,7 +685,14 @@ insert into
 values
     (
         1,
-        'aaa1e56f-cce8-4702-bb37-3ae072d42ad6' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'Yurtiçi Kargo'
+        ),
         '02:00:00'
     );
 
@@ -523,7 +701,14 @@ insert into
 values
     (
         2,
-        'aaa1e56f-cce8-4702-bb37-3ae072d42ad6' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'Yurtiçi Kargo'
+        ),
         '04:00:00'
     );
 
@@ -532,7 +717,14 @@ insert into
 values
     (
         9,
-        'aaa1e56f-cce8-4702-bb37-3ae072d42ad6' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'Yurtiçi Kargo'
+        ),
         '05:00:00'
     );
 
@@ -541,7 +733,14 @@ insert into
 values
     (
         10,
-        'aaa1e56f-cce8-4702-bb37-3ae072d42ad6' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'Yurtiçi Kargo'
+        ),
         '03:30:00'
     );
 
@@ -550,7 +749,14 @@ insert into
 values
     (
         3,
-        'f693a578-8351-4a37-aac6-8dc976e84c33' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'Aras Kargo'
+        ),
         '03:30:00'
     );
 
@@ -559,7 +765,14 @@ insert into
 values
     (
         4,
-        'f693a578-8351-4a37-aac6-8dc976e84c33' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'Aras Kargo'
+        ),
         '02:30:00'
     );
 
@@ -568,7 +781,14 @@ insert into
 values
     (
         8,
-        'f693a578-8351-4a37-aac6-8dc976e84c33' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'Aras Kargo'
+        ),
         '01:20:00'
     );
 
@@ -577,7 +797,14 @@ insert into
 values
     (
         7,
-        'f693a578-8351-4a37-aac6-8dc976e84c33' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'Aras Kargo'
+        ),
         '05:30:00'
     );
 
@@ -586,7 +813,14 @@ insert into
 values
     (
         1,
-        '6d1cb828-c793-41d6-85bc-4707728b8bd7' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'MNG Kargo'
+        ),
         '05:30:00'
     );
 
@@ -595,7 +829,14 @@ insert into
 values
     (
         2,
-        '6d1cb828-c793-41d6-85bc-4707728b8bd7' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'MNG Kargo'
+        ),
         '02:30:00'
     );
 
@@ -604,7 +845,14 @@ insert into
 values
     (
         3,
-        '6d1cb828-c793-41d6-85bc-4707728b8bd7' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'MNG Kargo'
+        ),
         '02:33:00'
     );
 
@@ -613,7 +861,14 @@ insert into
 values
     (
         4,
-        '6d1cb828-c793-41d6-85bc-4707728b8bd7' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'MNG Kargo'
+        ),
         '01:30:00'
     );
 
@@ -622,7 +877,14 @@ insert into
 values
     (
         5,
-        '6d1cb828-c793-41d6-85bc-4707728b8bd7' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'MNG Kargo'
+        ),
         '00:30:00'
     );
 
@@ -631,7 +893,14 @@ insert into
 values
     (
         6,
-        '6d1cb828-c793-41d6-85bc-4707728b8bd7' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'MNG Kargo'
+        ),
         '12:30:00'
     );
 
@@ -640,7 +909,14 @@ insert into
 values
     (
         7,
-        '6d1cb828-c793-41d6-85bc-4707728b8bd7' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'MNG Kargo'
+        ),
         '21:30:00'
     );
 
@@ -649,7 +925,14 @@ insert into
 values
     (
         8,
-        '6d1cb828-c793-41d6-85bc-4707728b8bd7' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'MNG Kargo'
+        ),
         '13:30:00'
     );
 
@@ -658,7 +941,14 @@ insert into
 values
     (
         9,
-        '6d1cb828-c793-41d6-85bc-4707728b8bd7' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'MNG Kargo'
+        ),
         '08:30:00'
     );
 
@@ -667,7 +957,14 @@ insert into
 values
     (
         10,
-        '6d1cb828-c793-41d6-85bc-4707728b8bd7' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'MNG Kargo'
+        ),
         '09:30:00'
     );
 
@@ -676,7 +973,14 @@ insert into
 values
     (
         5,
-        'abbcd65f-082c-4a6f-b07c-328bba8dcd96' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'Horoz Kargo'
+        ),
         '08:30:00'
     );
 
@@ -685,7 +989,14 @@ insert into
 values
     (
         6,
-        'abbcd65f-082c-4a6f-b07c-328bba8dcd96' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'Horoz Kargo'
+        ),
         '08:30:00'
     );
 
@@ -694,7 +1005,14 @@ insert into
 values
     (
         6,
-        '18928aad-d569-479d-8f17-bd9461c5528c' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'Moto Kurye'
+        ),
         '01:15:00'
     );
 
@@ -703,7 +1021,14 @@ insert into
 values
     (
         7,
-        '18928aad-d569-479d-8f17-bd9461c5528c' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'Moto Kurye'
+        ),
         '01:15:00'
     );
 
@@ -712,7 +1037,14 @@ insert into
 values
     (
         8,
-        '18928aad-d569-479d-8f17-bd9461c5528c' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'Moto Kurye'
+        ),
         '01:15:00'
     );
 
@@ -721,7 +1053,14 @@ insert into
 values
     (
         9,
-        '18928aad-d569-479d-8f17-bd9461c5528c' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'Moto Kurye'
+        ),
         '01:15:00'
     );
 
@@ -730,7 +1069,14 @@ insert into
 values
     (
         10,
-        '18928aad-d569-479d-8f17-bd9461c5528c' :: UUID,
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'Moto Kurye'
+        ),
         '01:15:00'
     );
 
@@ -739,78 +1085,218 @@ insert into
     contracted_shipping_companies (seller_id, company_id)
 values
     (
-        'd603d9b6-a84a-4034-8ec9-8ba83d03c81b' :: UUID,
-        'f693a578-8351-4a37-aac6-8dc976e84c33' :: UUID
+        (
+            select
+                seller_id
+            from
+                seller_companies
+            where
+                seller_name = 'Penti'
+        ),
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'Aras Kargo'
+        )
     );
 
 insert into
     contracted_shipping_companies (seller_id, company_id)
 values
     (
-        'd603d9b6-a84a-4034-8ec9-8ba83d03c81b' :: UUID,
-        'abbcd65f-082c-4a6f-b07c-328bba8dcd96' :: UUID
+        (
+            select
+                seller_id
+            from
+                seller_companies
+            where
+                seller_name = 'Penti'
+        ),
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'Horoz Kargo'
+        )
     );
 
 insert into
     contracted_shipping_companies (seller_id, company_id)
 values
     (
-        '3afd39f6-46aa-4373-a343-02f9a28a304f' :: UUID,
-        '6d1cb828-c793-41d6-85bc-4707728b8bd7' :: UUID
+        (
+            select
+                seller_id
+            from
+                seller_companies
+            where
+                seller_name = 'Mango'
+        ),
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'MNG Kargo'
+        )
     );
 
 insert into
     contracted_shipping_companies (seller_id, company_id)
 values
     (
-        '3afd39f6-46aa-4373-a343-02f9a28a304f' :: UUID,
-        '18928aad-d569-479d-8f17-bd9461c5528c' :: UUID
+        (
+            select
+                seller_id
+            from
+                seller_companies
+            where
+                seller_name = 'Mango'
+        ),
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'Moto Kurye'
+        )
     );
 
 insert into
     contracted_shipping_companies (seller_id, company_id)
 values
     (
-        '64ba6c20-1007-4e94-8c88-97221353be3f' :: UUID,
-        '18928aad-d569-479d-8f17-bd9461c5528c' :: UUID
+        (
+            select
+                seller_id
+            from
+                seller_companies
+            where
+                seller_name = 'Watsons'
+        ),
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'Moto Kurye'
+        )
     );
 
 insert into
     contracted_shipping_companies (seller_id, company_id)
 values
     (
-        '64ba6c20-1007-4e94-8c88-97221353be3f' :: UUID,
-        '6d1cb828-c793-41d6-85bc-4707728b8bd7' :: UUID
+        (
+            select
+                seller_id
+            from
+                seller_companies
+            where
+                seller_name = 'Watsons'
+        ),
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'MNG Kargo'
+        )
     );
 
 insert into
     contracted_shipping_companies (seller_id, company_id)
 values
     (
-        '3fd3f6c2-7711-4612-8206-3efec8f11bf6' :: UUID,
-        'abbcd65f-082c-4a6f-b07c-328bba8dcd96' :: UUID
+        (
+            select
+                seller_id
+            from
+                seller_companies
+            where
+                seller_name = 'Bershka'
+        ),
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'Horoz Kargo'
+        )
     );
 
 insert into
     contracted_shipping_companies (seller_id, company_id)
 values
     (
-        '3fd3f6c2-7711-4612-8206-3efec8f11bf6' :: UUID,
-        'f693a578-8351-4a37-aac6-8dc976e84c33' :: UUID
+        (
+            select
+                seller_id
+            from
+                seller_companies
+            where
+                seller_name = 'Bershka'
+        ),
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'Aras Kargo'
+        )
     );
 
 insert into
     contracted_shipping_companies (seller_id, company_id)
 values
     (
-        '57f56289-c32a-4d10-ad59-72920adfda84' :: UUID,
-        'aaa1e56f-cce8-4702-bb37-3ae072d42ad6' :: UUID
+        (
+            select
+                seller_id
+            from
+                seller_companies
+            where
+                seller_name = 'Bellona'
+        ),
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'Yurtiçi Kargo'
+        )
     );
 
 insert into
     contracted_shipping_companies (seller_id, company_id)
 values
     (
-        '57f56289-c32a-4d10-ad59-72920adfda84' :: UUID,
-        'aaa1e56f-cce8-4702-bb37-3ae072d42ad6' :: UUID
+        (
+            select
+                seller_id
+            from
+                seller_companies
+            where
+                seller_name = 'Bellona'
+        ),
+        (
+            select
+                company_id
+            from
+                shipping_companies
+            where
+                company_name = 'Yurtiçi Kargo'
+        )
     );
