@@ -1,4 +1,4 @@
-package mock
+package mocks
 
 import (
 	"context"
@@ -15,6 +15,6 @@ func NewMockRepository() *postgreMockRepository {
 	}
 }
 
-func (r *postgreMockRepository) SelectShippingCompany(c context.Context, deliveries models.Deliveries) (*models.Shipment, error) {
+func (r *postgreMockRepository) SelectShippingCompany(c context.Context, deliveries *models.Deliveries) (*models.Shipment, error) {
 	return nil, nil
 }
