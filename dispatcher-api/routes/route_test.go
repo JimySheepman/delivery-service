@@ -1,7 +1,7 @@
 package routes
 
 import (
-	mock "dispatcher-api/mocks"
+	"dispatcher-api/mocks"
 	"dispatcher-api/service"
 	"net/http/httptest"
 	"testing"
@@ -13,7 +13,7 @@ import (
 func TestRoutes(t *testing.T) {
 
 	app := fiber.New()
-	r := mock.NewMockRepository()
+	r := mocks.NewMockRepository()
 	service := service.NewRepoSerivce(r)
 	Routes(app, service)
 
